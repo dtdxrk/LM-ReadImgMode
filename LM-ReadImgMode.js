@@ -27,6 +27,9 @@ v2.0 2015-6-29
 		//总页数
 		box.tote = number;
 		
+		//跳转到number页
+		box.jump(number)
+		
 		//翻页开始
 		box.onPageStart(fn);
 
