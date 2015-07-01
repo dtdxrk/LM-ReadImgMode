@@ -1,0 +1,94 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>test</title>
+</head>
+<body>
+<div>
+	<button id="btn-prev">上一张</button>
+	<button id="btn-next">下一张</button>
+	<button id="btn-play">自动播放</button>
+	<button id="btn-stop">暂停</button>
+	<button id="btn-clear">清空记录</button>
+</div>
+
+<div>跳到<input type="text" id="page"  style="width:50px" />页<button id="btn-go">GO</button></div>
+<textarea id="textarea" style="position: absolute;right: 0;top:0;width:500px;height:100%; display:block;margin:5px 0;"></textarea>
+
+<!-- 读图模式 img -->
+<!-- http://icon.xgo-img.com.cn/photo/20131120/loading2.gif -->
+<img id="LM_ReadImgMode-img" width="800" height="600" src="" />
+<!-- 读图模式 img end-->
+
+<script src="LM-ReadImgMode-min.js"></script>
+<script>
+// 假数据
+var picList = [{"picPos":1,"pid":"1978634","originalPic":"http:\/\/img1d.xgo-img.com.cn\/pics\/1979\/1978634.jpg","bigPic":"http:\/\/img1d.xgo-img.com.cn\/pics\/1979\/b1978634.jpg","thumbPic":"http:\/\/img1d.xgo-img.com.cn\/pics\/1979\/100\/75\/1978634.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":2,"pid":"1978633","originalPic":"http:\/\/img1c.xgo-img.com.cn\/pics\/1979\/1978633.jpg","bigPic":"http:\/\/img1c.xgo-img.com.cn\/pics\/1979\/b1978633.jpg","thumbPic":"http:\/\/img1c.xgo-img.com.cn\/pics\/1979\/100\/75\/1978633.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":3,"pid":"1978632","originalPic":"http:\/\/img1b.xgo-img.com.cn\/pics\/1979\/1978632.jpg","bigPic":"http:\/\/img1b.xgo-img.com.cn\/pics\/1979\/b1978632.jpg","thumbPic":"http:\/\/img1b.xgo-img.com.cn\/pics\/1979\/100\/75\/1978632.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":4,"pid":"1978631","originalPic":"http:\/\/img1a.xgo-img.com.cn\/pics\/1979\/1978631.jpg","bigPic":"http:\/\/img1a.xgo-img.com.cn\/pics\/1979\/b1978631.jpg","thumbPic":"http:\/\/img1a.xgo-img.com.cn\/pics\/1979\/100\/75\/1978631.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":5,"pid":"1978630","originalPic":"http:\/\/img.xgo-img.com.cn\/pics\/1979\/1978630.jpg","bigPic":"http:\/\/img.xgo-img.com.cn\/pics\/1979\/b1978630.jpg","thumbPic":"http:\/\/img.xgo-img.com.cn\/pics\/1979\/100\/75\/1978630.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":6,"pid":"1978629","originalPic":"http:\/\/img1d.xgo-img.com.cn\/pics\/1979\/1978629.jpg","bigPic":"http:\/\/img1d.xgo-img.com.cn\/pics\/1979\/b1978629.jpg","thumbPic":"http:\/\/img1d.xgo-img.com.cn\/pics\/1979\/100\/75\/1978629.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":7,"pid":"1978628","originalPic":"http:\/\/img1c.xgo-img.com.cn\/pics\/1979\/1978628.jpg","bigPic":"http:\/\/img1c.xgo-img.com.cn\/pics\/1979\/b1978628.jpg","thumbPic":"http:\/\/img1c.xgo-img.com.cn\/pics\/1979\/100\/75\/1978628.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":8,"pid":"1978627","originalPic":"http:\/\/img1b.xgo-img.com.cn\/pics\/1979\/1978627.jpg","bigPic":"http:\/\/img1b.xgo-img.com.cn\/pics\/1979\/b1978627.jpg","thumbPic":"http:\/\/img1b.xgo-img.com.cn\/pics\/1979\/100\/75\/1978627.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":9,"pid":"1978626","originalPic":"http:\/\/img1a.xgo-img.com.cn\/pics\/1979\/1978626.jpg","bigPic":"http:\/\/img1a.xgo-img.com.cn\/pics\/1979\/b1978626.jpg","thumbPic":"http:\/\/img1a.xgo-img.com.cn\/pics\/1979\/100\/75\/1978626.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":10,"pid":"1978625","originalPic":"http:\/\/img.xgo-img.com.cn\/pics\/1979\/1978625.jpg","bigPic":"http:\/\/img.xgo-img.com.cn\/pics\/1979\/b1978625.jpg","thumbPic":"http:\/\/img.xgo-img.com.cn\/pics\/1979\/100\/75\/1978625.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":11,"pid":"1978624","originalPic":"http:\/\/img1d.xgo-img.com.cn\/pics\/1979\/1978624.jpg","bigPic":"http:\/\/img1d.xgo-img.com.cn\/pics\/1979\/b1978624.jpg","thumbPic":"http:\/\/img1d.xgo-img.com.cn\/pics\/1979\/100\/75\/1978624.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"},{"picPos":12,"pid":"1978623","originalPic":"http:\/\/img1c.xgo-img.com.cn\/pics\/1979\/1978623.jpg","bigPic":"http:\/\/img1c.xgo-img.com.cn\/pics\/1979\/b1978623.jpg","thumbPic":"http:\/\/img1c.xgo-img.com.cn\/pics\/1979\/100\/75\/1978623.jpg","brief":null,"describe":"\u8bb0\u8005\u5728\u67d0\u6c7d\u8f66\u4e8c\u624b\u5e02\u573a\u770b\u5230\u4e24\u8f86\u5d2d\u65b0\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u3002\u636e\u4e8c\u624b\u5e02\u573a\u5de5\u4f5c\u4eba\u5458\u4ecb\u7ecd\uff0c\u8fd9\u4e24\u8f86\u8f66\u867d\u7136\u5916\u89c2\u770b\u8d77\u6765\u4e0e\u771f\u7684\u52b3\u65af\u83b1\u65af\u94f6\u4e91\u5f88\u76f8\u4f3c\uff0c\u4f46\u5374\u662f\u5730\u5730\u9053\u9053\u7684\u201c\u5c71\u5be8\u8d27\u201d\u3002\u4e8c\u624b\u5e02\u573a\u7ed9\u51fa\u7684\u4f30\u4ef7\u662f\uff0c\u4e24\u8f86\u8f66\u517110\u4e07\u5143\u3002"}];
+
+var aImg = [],	//轮播图片的数组
+	aThumb = [];	//大图数组
+
+for(var i in picList){
+	aImg.push(picList[i].originalPic);
+	aThumb.push(picList[i].thumbPic);
+}
+
+/*轮播读图模式*/
+var box = new LM_ReadImgMode({
+	'id' : 'LM_ReadImgMode-img',	//轮播的图片
+	'aImg' : aImg	//轮播图片url的数组
+});
+
+box
+.onPageStart(function(){
+	log('onPageStart');
+})
+.onPageEnd(function(){
+	log('onPageEnd');
+})
+.prevEnd(function(){
+	log('prevEnd');
+})
+.nextEnd(function(){
+	log('nextEnd');
+})
+
+document.getElementById('btn-prev').onclick = function(){
+	box.prev();
+}
+
+document.getElementById('btn-next').onclick = function(){
+	box.next();
+}
+
+document.getElementById('btn-go').onclick = function(){
+	box.jump(document.getElementById('page').value);
+}
+
+document.getElementById('btn-play').onclick = function(){
+	log('autoPlay');
+	box.autoPlay();
+}
+
+document.getElementById('btn-stop').onclick = function(){
+	log('autoStop');
+	box.autoStop();
+}
+
+
+var _html ='',line=1;
+function log(str){
+	_html = '行'+line+':'+str+'\r'+_html;
+	line++;
+	document.getElementById('textarea').innerHTML =  _html
+}
+
+document.getElementById('btn-clear').onclick = function(){
+	_html ='';
+	line=1;
+	document.getElementById('textarea').innerHTML =  _html;
+}
+</script>
+</body>
+</html>
